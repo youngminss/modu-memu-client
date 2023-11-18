@@ -2,8 +2,12 @@
 
 import Header from "@/src/components/common/Header"
 import IconTileList from "@/src/components/home/IconTileList"
+import { useGeolocationPosition } from "@/src/store/useGeolocationPosition"
+import Link from "next/link"
 
 const HomePage = () => {
+  const init = useGeolocationPosition((state) => state.actions.init)
+
   return (
     <div className="h-[100dvh] w-[100dvw]">
       <Header />
@@ -18,12 +22,15 @@ const HomePage = () => {
           </p>
         </div>
 
-        <button
+        <Link
+          href="/map"
           className="!w-fit rounded-[0.4rem] bg-gray-700 px-[3.8rem] py-[1.6rem] text-[1.6rem] font-bold text-white"
-          onClick={() => {}}
+          onClick={() => {
+            init()
+          }}
         >
           회식 장소 찾기
-        </button>
+        </Link>
       </div>
 
       <div className="relative flex justify-center">
