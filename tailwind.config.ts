@@ -42,6 +42,18 @@ const config: Config = {
         "blue-800": "#2A4365",
         "blue-900": "#1A365D",
       },
+      fontSize: {
+        "heading-1": ["7.2rem", { lineHeight: "130%", fontWeight: "bold" }],
+        "heading-2": ["3.6rem", { lineHeight: "120%", fontWeight: "bold" }],
+        "heading-3": ["2.0rem", { lineHeight: "120%", fontWeight: "medium" }],
+        "heading-4": ["1.8rem", { lineHeight: "120%", fontWeight: "medium" }],
+        "body-1": ["1.6rem", { lineHeight: "120%", fontWeight: "bold" }],
+        "body-2": ["1.6rem", { lineHeight: "120%", fontWeight: "medium" }],
+        "body-3": ["1.6rem", { lineHeight: "120%", fontWeight: "normal" }],
+        "body-4": ["1.4rem", { lineHeight: "120%", fontWeight: "bold" }],
+        "body-5": ["1.4rem", { lineHeight: "150%", fontWeight: "normal" }],
+        detail: ["1.2rem", { lineHeight: "180%", fontWeight: "normal" }],
+      },
       boxShadow: {
         md: "0px 2px 4px -1px rgba(0, 0, 0, 0.06), 0px 4px 6px -1px rgba(0, 0, 0, 0.10)",
         lg: "0px 4px 6px -2px rgba(0, 0, 0, 0.05), 0px 10px 15px -3px rgba(0, 0, 0, 0.10)",
