@@ -12,13 +12,13 @@ const HomePage = () => {
     <div className="h-[100dvh] w-[100dvw]">
       <Header />
       <div className="flex flex-col items-center">
-        <div className="flex flex-col gap-y-[1.6rem] pb-[3.6rem] pt-[14.5rem]">
-          <h2 className="whitespace-pre-wrap text-center text-[7.2rem] font-bold text-gray-800">
+        <div className="flex flex-col gap-y-[1.6rem] px-[3.2rem] pb-[3.6rem] pt-[14.5rem]">
+          <h2 className="max-md:text-heading-2 max-[475px]:text-heading-3 whitespace-pre-wrap text-center text-[7.2rem] font-bold text-gray-800 max-[475px]:text-[2.8rem]">
             1분만에 맘에 드는{`\n`}회식장소 찾으러가기
           </h2>
 
-          <p className="text-[2rem] font-medium text-gray-600">
-            위치 정보 이용 권한을 허용하시면 내 주변의 다양한 회식 장소를 볼 수 있어요!
+          <p className="max-md:text-heading-3 max-[475px]:text-detail text-center text-[2rem] font-medium text-gray-600 max-[475px]:text-[1.4rem] max-[475px]:font-medium">
+            위치 정보 이용 권한을 허용하고 회식 장소 바로 봐요!
           </p>
         </div>
 
