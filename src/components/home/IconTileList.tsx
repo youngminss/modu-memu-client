@@ -21,7 +21,7 @@ const tileList = [
 
 const IconTileList = () => {
   return (
-    <div className="fixed bottom-0 -z-20 grid grid-cols-8 gap-[3.2rem]">
+    <div className="fixed bottom-0 -z-20 grid grid-cols-8 gap-[3.2rem] max-md:grid-cols-4">
       <div className="absolute left-0 top-0 h-full w-[100dvw] bg-gradient-to-b from-white via-white via-20% " />
 
       {tileList.map((tile, index) => {

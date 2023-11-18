@@ -45,8 +45,8 @@ const config: Config = {
       fontSize: {
         "heading-1": ["7.2rem", { lineHeight: "130%", fontWeight: "bold" }],
         "heading-2": ["3.6rem", { lineHeight: "120%", fontWeight: "bold" }],
-        "heading-3": ["2.0rem", { lineHeight: "120%", fontWeight: "medium" }],
-        "heading-4": ["1.8rem", { lineHeight: "120%", fontWeight: "medium" }],
+        "heading-3": ["2.0rem", { lineHeight: "150%", fontWeight: "medium" }],
+        "heading-4": ["1.8rem", { lineHeight: "150%", fontWeight: "medium" }],
         "body-1": ["1.6rem", { lineHeight: "120%", fontWeight: "bold" }],
         "body-2": ["1.6rem", { lineHeight: "120%", fontWeight: "medium" }],
         "body-3": ["1.6rem", { lineHeight: "120%", fontWeight: "normal" }],
