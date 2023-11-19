@@ -1,6 +1,7 @@
 import type { Metadata } from "next"
 import localFont from "next/font/local"
 
+import Script from "next/script"
 import "./globals.css"
 
 const pretendard = localFont({
@@ -55,6 +56,8 @@ const pretendard = localFont({
   ],
 })
 
+const KAKAO_SDK_URL = `//dapi.kakao.com/v2/maps/sdk.js?appkey=${process.env.NEXT_PUBLIC_KAKAO_APP_JS_KEY}&autoload=false`
+
 export const metadata: Metadata = {
   title: "모두의 회식",
   description: "1분 만에 마음에 드는 회식 장소 찾으러가기",
@@ -64,6 +67,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ko" className={pretendard.className}>
+      <Script src={KAKAO_SDK_URL} type="text/javascript" strategy="beforeInteractive" />
+
       <body>{children}</body>
     </html>
   )
