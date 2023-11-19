@@ -1,4 +1,5 @@
 import { create } from "zustand"
+import { STORAGE_KEYS, setSessionStorageItem } from "../utils/functions/storage"
 
 export interface Position {
   latitude: number
@@ -41,6 +42,11 @@ export const useGeolocationPosition = create<TGeolocationPositionStore>((set, ge
       set({ isPositionUpdating: true })
     },
     setCoordinates: (coords) => {
+      setSessionStorageItem(STORAGE_KEYS.MODU_MEMU_USER_POSITION, {
+        latitude: coords.latitude,
+        longitude: coords.longitude,
+      })
+
       set({
         coords: coords,
         position: {

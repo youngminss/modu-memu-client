@@ -24,6 +24,7 @@ const HomePage = () => {
 
         <Link
           href="/map"
+          replace
           className="!w-fit rounded-[0.4rem] bg-gray-700 px-[3.8rem] py-[1.6rem] text-[1.6rem] font-bold text-white"
           onClick={() => {
             init()
