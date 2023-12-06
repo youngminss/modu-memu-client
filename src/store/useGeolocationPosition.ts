@@ -14,7 +14,7 @@ interface IGeolocationPositionState {
 
 interface IGeolocationPositionAction {
   actions: {
-    setIsPositionUpdating: () => void
+    setIsPositionUpdating: (isPositionUpdating: boolean) => void
     setPosition: ({ latitude, longitude }: { latitude: number; longitude: number }) => void
     setCoordinates: (coords: GeolocationCoordinates) => void
     init: () => void
@@ -38,8 +38,8 @@ export const useGeolocationPosition = create<TGeolocationPositionStore>((set, ge
   ...initState,
 
   actions: {
-    setIsPositionUpdating: () => {
-      set({ isPositionUpdating: true })
+    setIsPositionUpdating: (isPositionUpdating) => {
+      set({ isPositionUpdating: isPositionUpdating })
     },
     setCoordinates: (coords) => {
       setSessionStorageItem(STORAGE_KEYS.MODU_MEMU_USER_POSITION, {
@@ -68,7 +68,7 @@ export const useGeolocationPosition = create<TGeolocationPositionStore>((set, ge
     init: () => {
       const geolocationActions = get().actions
 
-      geolocationActions.setIsPositionUpdating()
+      geolocationActions.setIsPositionUpdating(true)
 
       navigator.geolocation.getCurrentPosition(
         (position) => {
