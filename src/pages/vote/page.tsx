@@ -6,7 +6,7 @@ import { Position, useGeolocationPosition } from "@/src/store/useGeolocationPosi
 import { STORAGE_KEYS, getSessionStorageItem } from "@/src/utils/functions/storage"
 import { useEffect } from "react"
 
-const MapPage = () => {
+const VotePage = () => {
   const setPosition = useGeolocationPosition((state) => state.actions.setPosition)
 
   useEffect(() => {
@@ -29,4 +29,4 @@ const MapPage = () => {
   )
 }
 
-export default MapPage
+export default VotePage

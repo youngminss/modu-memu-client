@@ -1,5 +1,5 @@
 import { Map } from "react-kakao-maps-sdk"
-import { useGeolocationPosition } from "../store/useGeolocationPosition"
+import { useGeolocationPosition } from "../../../store/useGeolocationPosition"
 
 const KakaoMap = () => {
   const isPositionUpdating = useGeolocationPosition((state) => state.isPositionUpdating)
