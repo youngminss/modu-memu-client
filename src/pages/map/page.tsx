@@ -1,7 +1,7 @@
 "use client"
 
-import KakaoMap from "@/src/components/KakaoMap"
-import Header from "@/src/components/common/Header"
+import KakaoMap from "@/src/components/ui/templates/KakaoMap"
+import List from "@/src/components/ui/templates/List"
 import { Position, useGeolocationPosition } from "@/src/store/useGeolocationPosition"
 import { STORAGE_KEYS, getSessionStorageItem } from "@/src/utils/functions/storage"
 import { useEffect } from "react"
@@ -21,10 +21,7 @@ const MapPage = () => {
 
   return (
     <div className="flex h-[100svh]">
-      <div className="w-[45rem]">
-        <Header />
-      </div>
-
+      <List />
       <div className="relative flex-1">
         <KakaoMap />
       </div>
