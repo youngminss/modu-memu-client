@@ -31,11 +31,11 @@ const MapPage = () => {
         <Header />
 
         <div className="">
-          <Toggle onPressed={handleTogglePressed} showCloseButton>
+          <Toggle onPressedChange={handleTogglePressed} showCloseButton>
             <p>테스트 토글</p>
           </Toggle>
 
-          <Toggle className="-rotate-90 !rounded-[0.4rem] !p-[1rem]" onPressed={handleTogglePressed}>
+          <Toggle className="-rotate-90 !rounded-[0.4rem] !p-[1rem]" onPressedChange={handleTogglePressed}>
             <IconAdjustments size="1.5rem" />
           </Toggle>
         </div>
