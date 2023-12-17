@@ -1,5 +1,5 @@
 import { create } from "zustand"
-import { STORAGE_KEYS, setSessionStorageItem } from "../utils/functions/storage"
+import { STORAGE_KEYS, setSessionStorageItem } from "../../utils/functions/storage"
 
 export interface Position {
   latitude: number

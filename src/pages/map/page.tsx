@@ -1,9 +1,9 @@
 "use client"
 
-import Toggle from "@/components/Toggle"
 import KakaoMap from "@/src/components/KakaoMap"
 import Header from "@/src/components/common/Header"
-import { Position, useGeolocationPosition } from "@/src/store/useGeolocationPosition"
+import Toggle from "@/src/components/common/Toggle"
+import { Position, useGeolocationPosition } from "@/src/store/map/useGeolocationPosition"
 import { STORAGE_KEYS, getSessionStorageItem } from "@/src/utils/functions/storage"
 import { IconAdjustments } from "@tabler/icons-react"
 import { useEffect } from "react"
