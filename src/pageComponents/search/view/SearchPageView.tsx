@@ -8,7 +8,7 @@ import { STORAGE_KEYS, getSessionStorageItem } from "@/src/utils/functions/stora
 import { IconAdjustments } from "@tabler/icons-react"
 import { useEffect } from "react"
 
-const MapPage = () => {
+const SearchPage = () => {
   const setPosition = useGeolocationPosition((state) => state.actions.setPosition)
 
   useEffect(() => {
@@ -48,4 +48,4 @@ const MapPage = () => {
   )
 }
 
-export default MapPage
+export default SearchPage

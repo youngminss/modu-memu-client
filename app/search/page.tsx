@@ -1,5 +1,5 @@
-import MapPage from "@/src/pages/map/page"
+import SearchPage from "@/src/pageComponents/search/view/SearchPageView"
 
 export default function Map() {
-  return <MapPage />
+  return <SearchPage />
 }
