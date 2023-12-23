@@ -7,9 +7,14 @@ import { Position, useGeolocationPosition } from "@/src/store/map/useGeolocation
 import { STORAGE_KEYS, getSessionStorageItem } from "@/src/utils/functions/storage"
 import { IconAdjustments } from "@tabler/icons-react"
 import { useEffect } from "react"
+import useSearchPageBoundStore from "../store/useSearchPageBoundStore"
 
 const SearchPage = () => {
   const setPosition = useGeolocationPosition((state) => state.actions.setPosition)
+
+  const isSearchFilterEditSectionVisible = useSearchPageBoundStore((state) => state.isSearchFilterEditSectionVisible)
+
+  console.log(isSearchFilterEditSectionVisible)
 
   useEffect(() => {
     const userPositionBySession: Position | null = getSessionStorageItem(STORAGE_KEYS.MODU_MEMU_USER_POSITION)
@@ -31,10 +36,6 @@ const SearchPage = () => {
         <Header />
 
         <div className="">
-          <Toggle onPressedChange={handleTogglePressed} showCloseButton>
-            <p>테스트 토글</p>
-          </Toggle>
-
           <Toggle className="-rotate-90 !rounded-[0.4rem] !p-[1rem]" onPressedChange={handleTogglePressed}>
             <IconAdjustments size="1.5rem" />
           </Toggle>
