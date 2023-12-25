@@ -1,33 +1,69 @@
 import { StateCreator } from "zustand"
 
+export type TSearchFilterType = "food" | "mood"
+
+export interface ISearchFilter {
+  id: number
+  name: string
+}
+
+export type TSearchFilterTypeListMap = {
+  [key in TSearchFilterType]: {
+    filterName: string
+    filterList: ISearchFilter[]
+  }
+}
+
+export type TSearchFilterTypeSelectedMap = { [key in TSearchFilterType]: { [id: number]: boolean } }
+
 type TSearchFilterState = {
-  isSearchFilterEditSectionVisible: boolean
-  filterKeyAndSelectedListMap: { [key: string]: unknown }
+  filterTypeSelectedMap: { [type in TSearchFilterType]: { [id: number]: boolean } }
 }
 
 type TSearchFilterAction = {
   searchFilterActions: {
-    setIsSearchFilterEditSectionVisible: (isSearchFilterEditSectionVisible: boolean) => void
-    init: () => void
+    setFilterTypeSelectMap: ({ type, selectedId }: { type: TSearchFilterType; selectedId: number }) => void
+    init: (searchFilterTypeListMap: TSearchFilterTypeListMap) => void
   }
 }
 
 type TSearchFilterSlice = TSearchFilterState & TSearchFilterAction
 
 const initState: TSearchFilterState = {
-  isSearchFilterEditSectionVisible: false,
-  filterKeyAndSelectedListMap: {},
+  filterTypeSelectedMap: {
+    food: {},
+    mood: {},
+  },
 }
 
 const createSearchFilterSlice: StateCreator<TSearchFilterSlice, [], [], TSearchFilterSlice> = (set, get) => ({
   ...initState,
   searchFilterActions: {
-    setIsSearchFilterEditSectionVisible: (isSearchFilterEditSectionVisible) => {
-      set({
-        isSearchFilterEditSectionVisible: isSearchFilterEditSectionVisible,
+    setFilterTypeSelectMap: ({ type, selectedId }) => {
+      const filterTypeSelectedMap = get().filterTypeSelectedMap
+
+      set((state) => {
+        state.filterTypeSelectedMap[type][selectedId] = !filterTypeSelectedMap[type][selectedId]
+        return state
       })
     },
-    init: () => set(initState),
+    init: (searchFilterTypeListMap: TSearchFilterTypeListMap) => {
+      const filterTypeSelectedMap: TSearchFilterTypeSelectedMap = {
+        food: {},
+        mood: {},
+      }
+
+      Object.keys(searchFilterTypeListMap).forEach((filterKey) => {
+        searchFilterTypeListMap[filterKey as TSearchFilterType].filterList.forEach((filter) => {
+          filterTypeSelectedMap[filterKey as TSearchFilterType][filter.id] = false
+        })
+      })
+
+      set((state) => {
+        state.filterTypeSelectedMap = filterTypeSelectedMap
+        return state
+      })
+    },
   },
 })
 
