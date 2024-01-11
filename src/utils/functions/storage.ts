@@ -1,7 +1,3 @@
-export enum STORAGE_KEYS {
-  MODU_MEMU_USER_POSITION = "MODU_MEMU_USER_POSITION",
-}
-
 export const getSessionStorageItem = (key: string) => {
   if (sessionStorage.getItem(key) == null) {
     return null
