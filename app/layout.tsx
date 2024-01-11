@@ -5,6 +5,7 @@ import { KAKAO_SDK_URL } from "@/src/utils/constants/sdk"
 import Script from "next/script"
 import "./globals.css"
 import Layout from "@/src/components/Layout"
+import Header from "@/src/components/Header"
 
 const pretendard = localFont({
   display: "swap",
@@ -68,7 +69,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ko" className={pretendard.className}>
       <body>
-        <Layout>{children}</Layout>
+        <Layout>
+          <Header />
+          {children}
+        </Layout>
       </body>
       <Script src={KAKAO_SDK_URL} type="text/javascript" />
     </html>
