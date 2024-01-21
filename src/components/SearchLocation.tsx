@@ -1,5 +1,4 @@
-import { IconSearch } from "@tabler/icons-react"
-import Image from "next/image"
+import { IconCurrentLocation, IconSearch } from "@tabler/icons-react"
 import { memo } from "react"
 
 const SearchLocation = () => {
@@ -14,8 +13,8 @@ const SearchLocation = () => {
           1분만에 찾아드려요!
         </p>
         <div className="flex flex-col rounded bg-white px-[2rem] py-[2.4rem]">
-          <div className="flex pb-[0.4rem]">
-            <Image src="/images/search-location.svg" alt="search-location" height={18} width={18} />
+          <div className="flex items-center pb-[0.4rem]">
+            <IconCurrentLocation className="text-gray-700" size="1.8rem" />
             <span className="ml-[0.6rem] text-heading-4">원하는 지역을 검색해 주세요.</span>
           </div>
           <span className="flex-1 pb-[1.6rem] text-body-5 text-gray-500">
