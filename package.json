@@ -12,6 +12,7 @@
     "format:fix": "prettier --write --ignore-path .gitignore ."
   },
   "dependencies": {
+    "@tabler/icons-react": "^2.46.0",
     "next": "14.0.1",
     "react": "^18",
     "react-dom": "^18",
