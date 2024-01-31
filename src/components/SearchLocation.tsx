@@ -1,5 +1,6 @@
-import { IconCurrentLocation, IconSearch } from "@tabler/icons-react"
+import { IconCurrentLocation } from "@tabler/icons-react"
 import { memo } from "react"
+import InputPostCode from "./InputPostCode"
 
 const SearchLocation = () => {
   return (
@@ -20,10 +21,8 @@ const SearchLocation = () => {
           <span className="flex-1 pb-[1.6rem] text-body-5 text-gray-500">
             선택한 위치에서 1km 이내의 가장 적합한 음식점 장소를 추천해줘요
           </span>
-          <div className="flex flex-1 items-center gap-x-[0.4rem] rounded border-[1px] border-gray-200 bg-gray-50 p-[1.2rem]">
-            <IconSearch className="text-gray-400" size="1.8rem" />
-            <p className="text-body-3 text-gray-400">클릭하여 주소 검색하기</p>
-          </div>
+
+          <InputPostCode />
         </div>
       </div>
     </div>
