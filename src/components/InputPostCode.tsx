@@ -2,8 +2,13 @@ import { IconCircleX, IconSearch } from "@tabler/icons-react"
 import { useState } from "react"
 import DaumPostcodeEmbed, { Address } from "react-daum-postcode"
 
-const InputPostCode = () => {
-  const [address, setAddress] = useState<string | null>(null)
+const InputPostCode = ({
+  address,
+  onPostCodeInputCompleted,
+}: {
+  address?: string
+  onPostCodeInputCompleted: (address: string) => void
+}) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const onComplete = (postAddress: Address) => {
@@ -35,10 +40,7 @@ const InputPostCode = () => {
       }
     }
 
-    // TODO : Set extracted address info inside Store
-    console.log(addr, extraAddr)
-
-    setAddress(`${addr} ${extraAddr}`)
+    onPostCodeInputCompleted(`${addr} ${extraAddr}`)
     setIsOpen(false)
   }
 
