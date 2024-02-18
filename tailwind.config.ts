@@ -11,6 +11,7 @@ const config: Config = {
     extend: {
       colors: {
         white: "#FFFFFF",
+        yellow: "#FEE500",
         "primary-50": "#FDF0F0",
         "primary-100": "#FFD8D6",
         "primary-200": "#FFB7B5",
@@ -41,6 +42,8 @@ const config: Config = {
         "blue-700": "#2C5282",
         "blue-800": "#2A4365",
         "blue-900": "#1A365D",
+        "yellow-50": "#FFFAE6",
+        "yellow-100": "#9A5300",
       },
       fontSize: {
         "heading-1": ["7.2rem", { lineHeight: "130%", fontWeight: "bold" }],
