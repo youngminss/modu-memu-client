@@ -2,8 +2,13 @@ import { IconCircleX, IconSearch } from "@tabler/icons-react"
 import { useState } from "react"
 import DaumPostcodeEmbed, { Address } from "react-daum-postcode"
 
-const InputPostCode = () => {
-  const [address, setAddress] = useState<string | null>(null)
+const InputPostCode = ({
+  address,
+  onPostCodeInputCompleted,
+}: {
+  address?: string
+  onPostCodeInputCompleted: (address: string) => void
+}) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const onComplete = (postAddress: Address) => {
@@ -31,14 +36,11 @@ const InputPostCode = () => {
 
       // 표시할 참고항목이 있을 경우, 괄호까지 추가한 최종 문자열을 만든다.
       if (extraAddr !== "") {
-        extraAddr = " (" + extraAddr + ")"
+        extraAddr = "(" + extraAddr + ")"
       }
     }
 
-    // TODO : Set extracted address info inside Store
-    console.log(addr, extraAddr)
-
-    setAddress(`${addr} ${extraAddr}`)
+    onPostCodeInputCompleted(`${addr} ${extraAddr}`)
     setIsOpen(false)
   }
 
