@@ -52,7 +52,7 @@ const AccordionContent = (props: RadixAccordion.AccordionContentProps) => {
 
   return (
     <RadixAccordion.Content
-      className={`data-[state=open]:animate-slideDown data-[state=closed]:animate-slideUp overflow-hidden ${className}`}
+      className={`overflow-hidden data-[state=closed]:animate-slideUp data-[state=open]:animate-slideDown ${className}`}
       {...props}
     >
       {children}
