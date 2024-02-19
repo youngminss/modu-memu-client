@@ -7,6 +7,8 @@ import { useState } from "react"
 import { AccordionContent, AccordionItem, AccordionTrigger } from "@/src/components/Accordion"
 import Modal from "@/src/components/Modal/Modal"
 import Toggle from "@/src/components/Toggle"
+import useSearchFilter, { TSearchFoodFilterType } from "@/src/hooks/useSearchFilter"
+import { DUMMY_SEARCH_FILTER_CATEGORY_LIST_MAP } from "@/src/utils/constants/mock"
 import * as Accordion from "@radix-ui/react-accordion"
 import axios from "axios"
 import Image from "next/image"
@@ -30,6 +32,11 @@ const HomePage = () => {
   const [invalidAddress, setInvalidAddress] = useState<string | null>(null)
 
   const isSubmitAble = !!location.address
+
+  // TODO : Params`s search filter category list map data by api response
+  const { selectedFilterMetaMap, vibeFilterList, foodFilterListMap, onSelectedFilterChanged } = useSearchFilter({
+    searchFilterListMap: DUMMY_SEARCH_FILTER_CATEGORY_LIST_MAP,
+  })
 
   const handlePostCodeInputCompleted = async (address: string) => {
     const isAvailableAddress = /강남구/.test(address)
@@ -60,7 +67,8 @@ const HomePage = () => {
 
   const onSubmit = () => {
     if (isSubmitAble) {
-      console.log(location)
+      // TODO: Replace with query string
+      console.log(location, selectedFilterMetaMap)
     }
   }
 
@@ -97,11 +105,16 @@ const HomePage = () => {
           </div>
 
           <div className="flex flex-wrap gap-x-[0.6rem] gap-y-[0.8rem]">
-            {DUMMY_SEARCH_FILTER_TYPE_LIST_MAP["vibe"].map((vibe) => {
-              const { id, name } = vibe
+            {vibeFilterList.map((vibe) => {
+              const { id, name, value } = vibe
               return (
-                <div key={`${id}_${name}`} onClick={() => {}}>
-                  <Toggle>{name}</Toggle>
+                <div
+                  key={`${id}_${name}`}
+                  onClick={() => {
+                    onSelectedFilterChanged({ searchFilterCategory: "vibe", value })
+                  }}
+                >
+                  <Toggle pressed={selectedFilterMetaMap.vibe[value]}>{name}</Toggle>
                 </div>
               )
             })}
@@ -115,59 +128,34 @@ const HomePage = () => {
           </div>
 
           <Accordion.Root className="flex flex-col gap-y-[1.2rem]" type="multiple">
-            <AccordionItem value="한식">
-              <AccordionTrigger>
-                <p className="py-[1.2rem] text-body-2 text-gray-800">한식</p>
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="flex flex-wrap gap-x-[0.6rem] gap-y-[0.8rem]">
-                  {DUMMY_SEARCH_FILTER_TYPE_LIST_MAP["food"].map((mood) => {
-                    const { id, name } = mood
-                    return (
-                      <div key={`${id}_${name}`} onClick={() => {}}>
-                        <Toggle>{name}</Toggle>
-                      </div>
-                    )
-                  })}
-                </div>
-              </AccordionContent>
-            </AccordionItem>
+            {Object.keys(foodFilterListMap).map((foodFilter) => {
+              const foodFilterList = foodFilterListMap[foodFilter as TSearchFoodFilterType]
 
-            <AccordionItem value="중식">
-              <AccordionTrigger>
-                <p className="py-[1.2rem] text-body-2 text-gray-800">중식</p>
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="flex flex-wrap gap-x-[0.6rem] gap-y-[0.8rem]">
-                  {DUMMY_SEARCH_FILTER_TYPE_LIST_MAP["food"].map((mood) => {
-                    const { id, name } = mood
-                    return (
-                      <div key={`${id}_${name}`} onClick={() => {}}>
-                        <Toggle>{name}</Toggle>
-                      </div>
-                    )
-                  })}
-                </div>
-              </AccordionContent>
-            </AccordionItem>
-
-            <AccordionItem value="일식">
-              <AccordionTrigger>
-                <p className="py-[1.2rem] text-body-2 text-gray-800">일식</p>
-              </AccordionTrigger>
-              <AccordionContent>
-                <div className="flex flex-wrap gap-x-[0.6rem] gap-y-[0.8rem]">
-                  {DUMMY_SEARCH_FILTER_TYPE_LIST_MAP["food"].map((mood) => {
-                    const { id, name } = mood
-                    return (
-                      <div key={`${id}_${name}`} onClick={() => {}}>
-                        <Toggle>{name}</Toggle>
-                      </div>
-                    )
-                  })}
-                </div>
-              </AccordionContent>
-            </AccordionItem>
+              return (
+                <AccordionItem key={`${foodFilter}`} value={foodFilter}>
+                  <AccordionTrigger>
+                    <p className="py-[1.2rem] text-body-2 text-gray-800">{foodFilter}</p>
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <div className="flex flex-wrap gap-x-[0.6rem] gap-y-[0.8rem]">
+                      {foodFilterList.map((food) => {
+                        const { id, name, value } = food
+                        return (
+                          <div
+                            key={`${id}_${name}_${value}`}
+                            onClick={() => {
+                              onSelectedFilterChanged({ searchFilterCategory: "food", value })
+                            }}
+                          >
+                            <Toggle pressed={selectedFilterMetaMap.food[value]}>{name}</Toggle>
+                          </div>
+                        )
+                      })}
+                    </div>
+                  </AccordionContent>
+                </AccordionItem>
+              )
+            })}
           </Accordion.Root>
         </div>
       </div>
@@ -212,62 +200,3 @@ const HomePage = () => {
 }
 
 export default HomePage
-
-export const DUMMY_SEARCH_FILTER_TYPE_LIST_MAP: { [key: string]: any[] } = {
-  food: [
-    {
-      id: 1,
-      name: "소고기",
-      type: "한식",
-    },
-    {
-      id: 2,
-      name: "치킨",
-      type: "기타",
-    },
-    {
-      id: 3,
-      name: "삼겹살",
-      type: "한식",
-    },
-    {
-      id: 4,
-      name: "회/해물",
-      type: "한식",
-    },
-    {
-      id: 5,
-      name: "샤브샤브",
-      type: "한식",
-    },
-    {
-      id: 6,
-      name: "마라탕",
-      type: "중식",
-    },
-    {
-      id: 7,
-      name: "양꼬치",
-      type: "중식",
-    },
-    {
-      id: 8,
-      name: "베트남음식",
-      type: "기타",
-    },
-  ],
-  vibe: [
-    {
-      id: 1,
-      name: "모던한",
-    },
-    {
-      id: 2,
-      name: "조용한",
-    },
-    {
-      id: 3,
-      name: "화려한",
-    },
-  ],
-}
