@@ -6,7 +6,6 @@
     "plugin:@typescript-eslint/recommended",
     "plugin:prettier/recommended",
     "plugin:react-hooks/recommended",
-    "prettier/prettier",
     "prettier"
   ],
   "plugins": ["prettier", "@typescript-eslint"],
@@ -15,6 +14,8 @@
     "ecmaVersion": 2020
   },
   "rules": {
+    "prettier/prettier": "off",
+    "react/no-children-prop": "off",
     "@typescript-eslint/no-non-null-assertion": "off",
     "no-unused-vars": [1, { "args": "after-used", "argsIgnorePattern": "^_" }],
     "@typescript-eslint/no-empty-interface": [
