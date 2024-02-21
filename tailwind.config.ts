@@ -11,6 +11,7 @@ const config: Config = {
     extend: {
       colors: {
         white: "#FFFFFF",
+        yellow: "#FEE500",
         "primary-50": "#FDF0F0",
         "primary-100": "#FFD8D6",
         "primary-200": "#FFB7B5",
@@ -41,6 +42,8 @@ const config: Config = {
         "blue-700": "#2C5282",
         "blue-800": "#2A4365",
         "blue-900": "#1A365D",
+        "yellow-50": "#FFFAE6",
+        "yellow-100": "#9A5300",
       },
       fontSize: {
         "heading-1": ["7.2rem", { lineHeight: "130%", fontWeight: "bold" }],
@@ -52,7 +55,8 @@ const config: Config = {
         "body-3": ["1.6rem", { lineHeight: "120%", fontWeight: "normal" }],
         "body-4": ["1.4rem", { lineHeight: "120%", fontWeight: "bold" }],
         "body-5": ["1.4rem", { lineHeight: "150%", fontWeight: "normal" }],
-        detail: ["1.2rem", { lineHeight: "180%", fontWeight: "normal" }],
+        "single-popup": ["2rem", { lineHeight: "150%", fontWeight: "normal" }],
+        detail: ["1.2rem", { lineHeight: "150%", fontWeight: "normal" }],
       },
       boxShadow: {
         md: "0px 2px 4px -1px rgba(0, 0, 0, 0.06), 0px 4px 6px -1px rgba(0, 0, 0, 0.10)",
