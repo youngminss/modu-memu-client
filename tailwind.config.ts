@@ -55,7 +55,8 @@ const config: Config = {
         "body-3": ["1.6rem", { lineHeight: "120%", fontWeight: "normal" }],
         "body-4": ["1.4rem", { lineHeight: "120%", fontWeight: "bold" }],
         "body-5": ["1.4rem", { lineHeight: "150%", fontWeight: "normal" }],
-        detail: ["1.2rem", { lineHeight: "180%", fontWeight: "normal" }],
+        "single-popup": ["2rem", { lineHeight: "150%", fontWeight: "normal" }],
+        detail: ["1.2rem", { lineHeight: "150%", fontWeight: "normal" }],
       },
       boxShadow: {
         md: "0px 2px 4px -1px rgba(0, 0, 0, 0.06), 0px 4px 6px -1px rgba(0, 0, 0, 0.10)",
