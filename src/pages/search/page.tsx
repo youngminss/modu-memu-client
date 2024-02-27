@@ -6,11 +6,27 @@ import SearchPageTab, { ITabStore } from "@/src/components/SearchPageTab"
 import SearchSelectedFilterSection from "@/src/components/SearchSelectedFilterSection"
 import PlaceItem, { IMood, IPlace, IPlaceItem } from "@/src/components/place/PlaceItem"
 import { PlaceMookUpData } from "@/src/mocks/PlaceData"
+import { TSearchBoundedSlice, createSearchStore } from "@/src/store/search/SearchCreateStore"
 import useSearchBoundStore from "@/src/store/search/useSearchBoundStore"
 import { useTabStore } from "@/src/store/useTabStore"
 import Image from "next/image"
 import { useSearchParams } from "next/navigation"
-import { useEffect, useState } from "react"
+import { createContext, memo, useEffect, useRef, useState } from "react"
+import { StoreApi } from "zustand"
+
+export const SearchStoreContext = createContext<StoreApi<TSearchBoundedSlice> | null>(null)
+
+const SearchPageProvider = () => {
+  const searchStoreRef = useRef<StoreApi<TSearchBoundedSlice>>(createSearchStore())
+
+  return (
+    <SearchStoreContext.Provider value={searchStoreRef.current}>
+      <SearchPage />
+    </SearchStoreContext.Provider>
+  )
+}
+
+export default memo(SearchPageProvider)
 
 const SearchPage = () => {
   const searchParams = useSearchParams()
@@ -140,5 +156,3 @@ const SearchPage = () => {
     </div>
   )
 }
-
-export default SearchPage

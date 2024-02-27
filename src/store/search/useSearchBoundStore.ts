@@ -1,4 +1,4 @@
-import { SearchStoreContext } from "@/app/search/page"
+import { SearchStoreContext } from "@/src/pages/search/page"
 import { useContext } from "react"
 import { StoreApi, useStore } from "zustand"
 import { TSearchBoundedSlice } from "./SearchCreateStore"
