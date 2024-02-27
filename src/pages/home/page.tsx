@@ -12,21 +12,24 @@ import { DUMMY_SEARCH_FILTER_CATEGORY_LIST_MAP } from "@/src/utils/constants/moc
 import * as Accordion from "@radix-ui/react-accordion"
 import axios from "axios"
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 
 type TCoord = {
   latitude?: number
   longitude?: number
 }
 
-type TLocation = TCoord & {
+export type TLocation = TCoord & {
   address?: string
 }
 
-const DEFAULT_ADDRESS = "서울 강남구 역삼동 820-10 (강남역 11번 출구)"
+export const DEFAULT_ADDRESS = "서울 강남구 역삼동 820-10 (강남역 11번 출구)"
 const DEFAULT_LATITUDE = 37.498895
 const DEFAULT_LONGITUDE = 127.02773
 
 const HomePage = () => {
+  const router = useRouter()
+
   const [showModal, setShowModal] = useState(false)
   const [location, setLocation] = useState<TLocation>({})
   const [invalidAddress, setInvalidAddress] = useState<string | null>(null)
@@ -66,10 +69,25 @@ const HomePage = () => {
   }
 
   const onSubmit = () => {
-    if (isSubmitAble) {
-      // TODO: Replace with query string
-      console.log(location, selectedFilterMetaMap)
-    }
+    const { latitude, longitude, address } = location
+    const { food, vibe } = selectedFilterMetaMap
+
+    const selectedFoodFilterValueList = Object.entries(food)
+      .filter((item) => item[1])
+      .map((item) => item[0])
+
+    const selectedVibeFilterValueList = Object.entries(vibe)
+      .filter((item) => item[1])
+      .map((item) => item[0])
+
+    const foodQueryString =
+      selectedFoodFilterValueList.length != 0 ? `&food=${selectedFoodFilterValueList.join(",")}` : ""
+    const vibeQueryString =
+      selectedVibeFilterValueList.length != 0 ? `&vibe=${selectedVibeFilterValueList.join(",")}` : ""
+
+    const queryString = `?latitude=${latitude}&longitude=${longitude}&address=${address}${foodQueryString}${vibeQueryString}`
+
+    router.replace(`/search${queryString}`)
   }
 
   return (
@@ -160,14 +178,14 @@ const HomePage = () => {
         </div>
       </div>
 
-      <div className="fixed bottom-0 w-full max-w-[48rem] bg-white px-[2rem] py-[3.2rem]">
+      <div className="fixed bottom-0 z-[10] w-full max-w-[48rem] bg-white px-[2rem] py-[3.2rem]">
         <div
           className={`rounded-[0.4rem] py-[2rem] ${
             isSubmitAble ? "cursor-pointer bg-primary-500 " : "cursor-not-allowed bg-gray-300"
           }`}
           onClick={onSubmit}
         >
-          <p className="text-center text-body-1 text-white">회식 장소 찾기</p>
+          <p className=" text-center text-body-1 text-white">회식 장소 찾기</p>
         </div>
       </div>
 
