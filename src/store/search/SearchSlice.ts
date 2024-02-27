@@ -83,8 +83,7 @@ const createSearchSlice: StateCreator<TSearchSlice, [], [], TSearchSlice> = (set
     },
     clear: () => {
       set((state) => {
-        ;(state.filterValueNameMap = initState.filterValueNameMap),
-          (state.filterTypeSelectedMap = initState.filterTypeSelectedMap)
+        state.filterTypeSelectedMap = initState.filterTypeSelectedMap
         return state
       })
     },
