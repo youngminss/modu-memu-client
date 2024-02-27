@@ -18,13 +18,13 @@ const SearchFilterSelectionSection = () => {
 
   return (
     <div className="flex flex-1 flex-col">
-      <div className="flex items-center justify-between border-b border-solid border-gray-100 px-[2rem] py-[1.6rem]">
+      <div className="flex flex-col border-b border-solid border-gray-100 px-[2rem] py-[1.6rem]">
+        <IconX className="ml-auto cursor-pointer text-gray-500" size="3.2rem" onClick={setIsFilterSettingsOpen} />
+
         <div className="flex items-center gap-x-[0.4rem]">
           <IconCurrentLocation size="1.8rem" />
-          <p className=" text-body-2 font-medium text-gray-800">{location?.address ?? DEFAULT_ADDRESS}</p>
+          <p className="text-body-2 font-medium text-gray-800">{location?.address ?? DEFAULT_ADDRESS}</p>
         </div>
-
-        <IconX className="ml-auto cursor-pointer text-gray-500" size="3.2rem" onClick={setIsFilterSettingsOpen} />
       </div>
 
       <div className="flex flex-col px-[2rem] py-[1.6rem]">
