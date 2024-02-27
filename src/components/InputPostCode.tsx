@@ -63,7 +63,7 @@ const InputPostCode = ({
       <div
         className={`${
           isOpen ? "fixed flex flex-col" : "hidden"
-        } h-[calc(100vh - 7.8rem)] left-[50%] top-[7.8rem] mx-auto w-screen max-w-[48rem] -translate-x-[50%]`}
+        } h-[calc(100vh - 7.8rem)] left-[50%] top-[7.8rem] z-[100] mx-auto w-screen max-w-[48rem] -translate-x-[50%] overflow-hidden`}
       >
         <div className="relative flex h-[4.6rem] items-center justify-between bg-gray-600 pl-[2rem] pr-[1.4rem]">
           <p className="text-[1.8rem] text-body-1 text-white">우편번호 찾기</p>

@@ -1,15 +1,41 @@
 "use client"
 
-import FilterDiv from "@/src/components/FilterDiv"
-import Image from "next/image"
+import Modal from "@/src/components/DoubleModal"
+import SearchFilterSelectionSection from "@/src/components/SearchFilterSelectionSection"
 import SearchPageTab, { ITabStore } from "@/src/components/SearchPageTab"
+import SearchSelectedFilterSection from "@/src/components/SearchSelectedFilterSection"
 import PlaceItem, { IMood, IPlace, IPlaceItem } from "@/src/components/place/PlaceItem"
 import { PlaceMookUpData } from "@/src/mocks/PlaceData"
+import { TSearchBoundedSlice, createSearchStore } from "@/src/store/search/SearchCreateStore"
+import useSearchBoundStore from "@/src/store/search/useSearchBoundStore"
 import { useTabStore } from "@/src/store/useTabStore"
-import { useEffect, useState } from "react"
-import Modal from "@/src/components/DoubleModal"
+import Image from "next/image"
+import { useSearchParams } from "next/navigation"
+import { createContext, memo, useEffect, useRef, useState } from "react"
+import { StoreApi } from "zustand"
+
+export const SearchStoreContext = createContext<StoreApi<TSearchBoundedSlice> | null>(null)
+
+const SearchPageProvider = () => {
+  const searchStoreRef = useRef<StoreApi<TSearchBoundedSlice>>(createSearchStore())
+
+  return (
+    <SearchStoreContext.Provider value={searchStoreRef.current}>
+      <SearchPage />
+    </SearchStoreContext.Provider>
+  )
+}
+
+export default memo(SearchPageProvider)
 
 const SearchPage = () => {
+  const searchParams = useSearchParams()
+  const latitudeString = searchParams?.get("latitude") ?? ""
+  const longitudeString = searchParams?.get("longitude") ?? ""
+  const addressString = searchParams?.get("address") ?? ""
+  const foodString = searchParams?.get("food") ?? ""
+  const vibeString = searchParams?.get("vibe") ?? ""
+
   const { isVoteClicked } = useTabStore() as ITabStore
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false)
   const [clickedItems, setClickedItems] = useState<IPlaceItem[]>([])
@@ -62,49 +88,68 @@ const SearchPage = () => {
     buttonText: "진행할게요",
   }
 
+  const isFilterSettingsOpen = useSearchBoundStore((state) => state.isFilterSettingsOpen)
+  const { init } = useSearchBoundStore((state) => state.searchActions)
+
+  useEffect(() => {
+    init({
+      foodList: foodString ? foodString.split(",") : [],
+      vibeList: vibeString ? vibeString.split(",") : [],
+      location: {
+        latitude: parseFloat(latitudeString),
+        longitude: parseFloat(longitudeString),
+        address: addressString,
+      },
+    })
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+
   return (
     <div id="layout">
       {isModalOpen && (
         <Modal onClose={closeModal} isSingleButton={false} doubleButtonProps={modalStyle} buttonClick={closeModal} />
       )}
       <SearchPageTab />
-      <FilterDiv />
-      {isVoteClicked ? (
-        clickedItems.length === 0 ? (
-          <div className="grid h-[22rem] place-content-center">
-            <div className="grid w-[18.4rem] place-items-center">
-              <Image alt="vote-empty" src="/icons/vote_empty.svg" width={77} height={44} />
-              <span className="mt-[2rem] text-center text-body-5 text-gray-500">
-                장소에서 모두를 위한 회식 장소를 투표함에 추가해보세요!
-              </span>
+
+      <SearchSelectedFilterSection />
+
+      {isFilterSettingsOpen && <SearchFilterSelectionSection />}
+
+      {!isFilterSettingsOpen &&
+        (isVoteClicked ? (
+          clickedItems.length === 0 ? (
+            <div className="grid h-[22rem] place-content-center">
+              <div className="grid w-[18.4rem] place-items-center">
+                <Image alt="vote-empty" src="/icons/vote_empty.svg" width={77} height={44} />
+                <span className="mt-[2rem] text-center text-body-5 text-gray-500">
+                  장소에서 모두를 위한 회식 장소를 투표함에 추가해보세요!
+                </span>
+              </div>
             </div>
-          </div>
+          ) : (
+            clickedItems.map((placeData) => (
+              <PlaceItem
+                key={placeData.place.name}
+                place={placeData.place}
+                mood={placeData.mood}
+                onClick={() => handleItemClick(placeData.place, placeData.mood)}
+                onRemove={handleRemoveItem}
+              />
+            ))
+          )
         ) : (
-          clickedItems.map((placeData) => (
-            <PlaceItem
-              key={placeData.place.name}
-              place={placeData.place}
-              mood={placeData.mood}
-              onClick={() => handleItemClick(placeData.place, placeData.mood)}
-              onRemove={handleRemoveItem}
-            />
-          ))
-        )
-      ) : (
-        <>
-          {PlaceMookUpData.map((placeData, index) => (
-            <PlaceItem
-              key={index}
-              place={placeData.place}
-              mood={placeData.mood}
-              onClick={() => handleItemClick(placeData.place, placeData.mood)}
-              onRemove={handleRemoveItem}
-            />
-          ))}
-        </>
-      )}
+          <>
+            {PlaceMookUpData.map((placeData, index) => (
+              <PlaceItem
+                key={index}
+                place={placeData.place}
+                mood={placeData.mood}
+                onClick={() => handleItemClick(placeData.place, placeData.mood)}
+                onRemove={handleRemoveItem}
+              />
+            ))}
+          </>
+        ))}
     </div>
   )
 }
-
-export default SearchPage

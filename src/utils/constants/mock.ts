@@ -47,12 +47,6 @@ export const DUMMY_SEARCH_FILTER_CATEGORY_LIST_MAP: {
       value: "wineBar",
     },
     {
-      id: 8,
-      type: "술집",
-      name: "",
-      value: "",
-    },
-    {
       id: 9,
       type: "술집",
       name: "일본식주점",
