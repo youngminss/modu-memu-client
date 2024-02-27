@@ -1,4 +1,3 @@
-import React from "react"
 import { useTabStore } from "../store/useTabStore"
 
 export interface ITabStore {

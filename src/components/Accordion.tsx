@@ -39,7 +39,7 @@ const AccordionTrigger = (props: RadixAccordion.AccordionTriggerProps) => {
         {children}
 
         <IconChevronDown
-          className={`text-gray-600 transition-transform duration-300 ease-[cubic-bezier(0.87,_0,_0.13,_1)] group-data-[state=open]:rotate-180 ${className}`}
+          className={`z-[-1] text-gray-600 transition-transform duration-300 ease-[cubic-bezier(0.87,_0,_0.13,_1)] group-data-[state=open]:rotate-180 ${className}`}
           aria-hidden
         />
       </RadixAccordion.Trigger>
