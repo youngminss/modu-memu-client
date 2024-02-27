@@ -25,6 +25,9 @@ const SearchPage = () => {
   const [clickedItems, setClickedItems] = useState<IPlaceItem[]>([])
   const [storedClickedItems, setStoredClickedItems] = useState<unknown>()
 
+  console.log(foodString)
+  console.log(vibeString)
+
   useEffect(() => {
     setStoredClickedItems(localStorage.getItem("clickedItems"))
   }, [clickedItems])
@@ -77,8 +80,8 @@ const SearchPage = () => {
 
   useEffect(() => {
     init({
-      foodList: foodString.split(","),
-      vibeList: vibeString.split(","),
+      foodList: foodString ? foodString.split(",") : [],
+      vibeList: vibeString ? vibeString.split(",") : [],
       location: {
         latitude: parseFloat(latitudeString),
         longitude: parseFloat(longitudeString),
