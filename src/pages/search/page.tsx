@@ -41,9 +41,6 @@ const SearchPage = () => {
   const [clickedItems, setClickedItems] = useState<IPlaceItem[]>([])
   const [storedClickedItems, setStoredClickedItems] = useState<unknown>()
 
-  console.log(foodString)
-  console.log(vibeString)
-
   useEffect(() => {
     setStoredClickedItems(localStorage.getItem("clickedItems"))
   }, [clickedItems])
