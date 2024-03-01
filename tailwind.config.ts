@@ -44,6 +44,10 @@ const config: Config = {
         "blue-900": "#1A365D",
         "yellow-50": "#FFFAE6",
         "yellow-100": "#9A5300",
+        "orange-50": "#FFEFE5",
+        "orange-100": "#DB5340",
+        "teal-50": "#EDF4FF",
+        "teal-100": "#2154A1",
       },
       fontSize: {
         "heading-1": ["7.2rem", { lineHeight: "130%", fontWeight: "bold" }],
