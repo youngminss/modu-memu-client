@@ -9,6 +9,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        wide: "480px",
+        mobile: { min: "1px", max: "479px" },
+      },
       colors: {
         white: "#FFFFFF",
         yellow: "#FEE500",
