@@ -5,6 +5,7 @@ import { IconCurrentLocation } from "@tabler/icons-react"
 import { useState } from "react"
 
 import { AccordionContent, AccordionItem, AccordionTrigger } from "@/src/components/Accordion"
+import Header from "@/src/components/Header"
 import Modal from "@/src/components/Modal/Modal"
 import Toggle from "@/src/components/Toggle"
 import useSearchFilter, { TSearchFoodFilterType } from "@/src/hooks/useSearchFilter"
@@ -92,6 +93,8 @@ const HomePage = () => {
 
   return (
     <div>
+      <Header />
+
       <div className="flex flex-col bg-primary-500 px-[2rem]">
         <div className="pb-[3.85rem] pt-[4.4rem]">
           <p className="pb-[3rem] text-heading-2 text-white">

@@ -1,6 +1,7 @@
 "use client"
 
 import Modal from "@/src/components/DoubleModal"
+import Header from "@/src/components/Header"
 import SearchFilterSelectionSection from "@/src/components/SearchFilterSelectionSection"
 import SearchPageTab, { ITabStore } from "@/src/components/SearchPageTab"
 import SearchSelectedFilterSection from "@/src/components/SearchSelectedFilterSection"
@@ -106,6 +107,8 @@ const SearchPage = () => {
 
   return (
     <div id="layout">
+      <Header />
+
       {isModalOpen && (
         <Modal onClose={closeModal} isSingleButton={false} doubleButtonProps={modalStyle} buttonClick={closeModal} />
       )}
